@@ -3,6 +3,8 @@ micronaut:
         name: music-service
     server:
         port: 8080
+        cors:
+            enabled: true
     router:
         static:
             resources:
