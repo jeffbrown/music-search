@@ -19,15 +19,3 @@ task build(type: YarnTask, dependsOn: 'yarn') {
     description = 'Build the client bundle'
     args = ['run', 'build']
 }
-
-task test(type: YarnTask, dependsOn: 'yarn') {
-    group = 'verification'
-    description = 'Run the client tests'
-    args = ['run', 'test']
-}
-
-task eject(type: YarnTask, dependsOn: 'yarn') {
-    group = 'other'
-    description = 'Eject from the create-react-app scripts'
-    args = ['run', 'eject']
-}
