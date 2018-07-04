@@ -1,0 +1,21 @@
+task copyClientResources(dependsOn: ':music-client:build') {
+    group = 'build'
+    description = 'Copy client resources into server'
+}
+
+copyClientResources.doFirst {
+    copy {
+        from "${project(':music-client').projectDir}/dist"
+        into "${project(':music-service').buildDir}/resources/main/public/dist"
+    }
+    copy {
+        from "${project(':music-client').projectDir}/index.html"
+        into "${project(':music-service').buildDir}/resources/main/public"
+    }
+}
+
+task assembleServerAndClient(dependsOn: ['copyClientResources', ':music-service:shadowJar']) {
+    group = 'build'
+    description = 'Build combined server & client JAR'
+}
+

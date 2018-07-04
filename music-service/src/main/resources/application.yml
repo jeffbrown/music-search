@@ -1,0 +1,11 @@
+micronaut:
+    application:
+        name: music-service
+    server:
+        port: 8080
+    router:
+        static:
+            resources:
+                enabled: true
+                mapping: /**
+                paths: classpath:public

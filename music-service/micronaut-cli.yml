@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: music.service
+---
+testFramework: spock
+sourceLanguage: java
