@@ -1,7 +1,7 @@
 <template>
-  <table v-if="results.length > 0" class="table table-inbox table-hover">
+  <table v-if="results.length > 0" class="table table-inbox table-hover table-striped">
     <thead>
-    <tr><td>Artist Name</td><td>Album Title</td></tr>
+    <tr><th>Artist Name</th><th>Album Title</th></tr>
     </thead>
     <tbody>
     <tr v-for="result in results">
