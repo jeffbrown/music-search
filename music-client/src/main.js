@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueResource from 'vue-resource'
+import 'bootstrap/dist/css/bootstrap.css'
 import {DEV_SERVER_URL, PROD_SERVER_URL} from './config'
 
 Vue.use(VueResource);
