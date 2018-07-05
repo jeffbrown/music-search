@@ -6,6 +6,6 @@ import io.micronaut.http.client.Client;
 @Client("https://itunes.apple.com")
 public interface ItunesClient {
 
-    @Get("/search?limit=25&media=music&entity=album&term={term}")
-    SearchResult search(String term);
+    @Get("/search?limit={maxResults}&media=music&entity=album&term={term}")
+    SearchResult search(String term, int maxResults);
 }

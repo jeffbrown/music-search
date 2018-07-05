@@ -9,6 +9,20 @@
         <input placeholder="Enter Band Name" type="text" class="form-control" id="search-criteria"
                v-model="searchCriteria">
       </div>
+
+      <div class="form-group">
+        <label>Maximum Number Of Results:</label>
+        <label class="radio-inline">
+          <input type="radio" value="5" v-model="maxResults" name="maxResults">5
+        </label>
+        <label class="radio-inline">
+          <input type="radio" value="10" v-model="maxResults" name="maxResults">10
+        </label>
+        <label class="radio-inline">
+          <input type="radio" value="25" v-model="maxResults" name="maxResults">25
+        </label>
+      </div>
+
       <input type="submit" class="btn btn-primary" value="Search">
     </form>
 
@@ -23,6 +37,7 @@
     data() {
       return {
         searchCriteria: '',
+        maxResults: 25,
         results: []
       };
     },
@@ -30,7 +45,8 @@
       submitSearch() {
         this.$http.get('music/search/{searchCriteria}', {
           params: {
-            searchCriteria: this.searchCriteria
+            searchCriteria: this.searchCriteria,
+            maxResults: this.maxResults
           }
         })
           .then(
