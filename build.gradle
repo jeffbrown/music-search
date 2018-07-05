@@ -8,10 +8,6 @@ copyClientResources.doFirst {
         from "${project(':music-client').projectDir}/dist"
         into "${project(':music-service').buildDir}/resources/main/public/dist"
     }
-    copy {
-        from "${project(':music-client').projectDir}/index.html"
-        into "${project(':music-service').buildDir}/resources/main/public"
-    }
 }
 
 task assembleServerAndClient(dependsOn: ['copyClientResources', ':music-service:shadowJar']) {
