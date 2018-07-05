@@ -6,7 +6,7 @@ task copyClientResources(dependsOn: ':music-client:build') {
 copyClientResources.doFirst {
     copy {
         from "${project(':music-client').projectDir}/dist"
-        into "${project(':music-service').buildDir}/resources/main/public/dist"
+        into "${project(':music-service').buildDir}/resources/main/public/"
     }
 }
 
