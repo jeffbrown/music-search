@@ -38,14 +38,7 @@ dependencies {
     compile "io.micronaut:http-server-netty"
     compile "io.micronaut:inject"
     compile "io.micronaut:runtime"
-    compileOnly "io.micronaut:inject-java"
     runtime "ch.qos.logback:logback-classic:1.2.3"
-//    testCompile("org.spockframework:spock-core:1.1-groovy-2.4") {
-//        exclude group: "org.codehaus.groovy", module: "groovy-all"
-//    }
-//    testCompile "io.micronaut:inject-groovy"
-//    testCompile "junit:junit:4.12"
-//    testCompile "io.micronaut:inject-java"
 }
 
 shadowJar {
