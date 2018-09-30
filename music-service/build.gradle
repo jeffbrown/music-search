@@ -1,24 +1,16 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven { url "https://plugins.gradle.org/m2/" }
-    }
-    dependencies {
-        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.4"
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE"
-        classpath "net.ltgt.gradle:gradle-apt-plugin:0.15"
-    }
+plugins {
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "com.github.johnrengelman.shadow" version "4.0.0"
+    id "net.ltgt.apt-eclipse" version "0.18"
+    id "net.ltgt.apt-idea" version "0.18"	
 }
 
-version "0.1"
-group "music.service"
-
-apply plugin:"io.spring.dependency-management"
-apply plugin:"com.github.johnrengelman.shadow"
 apply plugin:"application"
+apply plugin:"groovy"
 apply plugin:"java"
-apply plugin:"net.ltgt.apt-eclipse"
-apply plugin:"net.ltgt.apt-idea"
+
+version "0.2.BUILD-SNAPSHOT"
+group "music.service"
 
 repositories {
     mavenLocal()
@@ -28,17 +20,18 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micronaut:bom:1.0.0.M4'
+        mavenBom 'io.micronaut:bom:1.0.0.RC1'
     }
 }
 
 dependencies {
     annotationProcessor "io.micronaut:inject-java"
-    compile "io.micronaut:http-client"
-    compile "io.micronaut:http-server-netty"
-    compile "io.micronaut:inject"
-    compile "io.micronaut:runtime"
-    runtime "ch.qos.logback:logback-classic:1.2.3"
+    implementation "io.micronaut:http-client"
+    implementation "io.micronaut:http-server-netty"
+    implementation "io.micronaut:inject"
+    implementation "io.micronaut:runtime"
+    compileOnly "io.micronaut:inject-java"
+    runtimeOnly "ch.qos.logback:logback-classic:1.2.3"
 }
 
 shadowJar {
