@@ -47,7 +47,7 @@ That will start the server on port 8080.
 A [Docker](http://docker.com) image has been published which includes a version of this application.  To 
 install the image and start the container the first time run the following:
 
-    docker run --name mn_music_search -d -p 8086:8080 micronautsamples/music-search:0.1
+    docker run --name mn_music_search -d -p 8086:8080 micronautsamples/music-search:0.2
     
 Note that the argument after `-p` is a pair of port numbers.  The second number is the port inside the 
 container and that needs to be 8080.  The first number is the port in the host environment that you would 

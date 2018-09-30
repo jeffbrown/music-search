@@ -9,7 +9,7 @@ apply plugin:"application"
 apply plugin:"groovy"
 apply plugin:"java"
 
-version "0.2.BUILD-SNAPSHOT"
+version "0.2"
 group "music.service"
 
 repositories {
