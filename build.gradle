@@ -10,8 +10,10 @@ buildscript {
 
 apply plugin: 'docker'
 
-group 'micronautsamples'
-version '0.3'
+allprojects {
+    group 'micronautsamples'
+    version '0.4.BUILD-SNAPSHOT'
+}
 
 task copyClientResources(dependsOn: ':music-client:build') {
     group = 'build'
