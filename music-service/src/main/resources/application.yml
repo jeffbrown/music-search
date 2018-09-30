@@ -6,8 +6,8 @@ micronaut:
         cors:
             enabled: true
     router:
-        static:
-            resources:
+        static-resources:
+            default:
                 enabled: true
                 mapping: /**
                 paths: classpath:public
