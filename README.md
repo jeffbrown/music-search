@@ -38,7 +38,7 @@ both the backend service and the UI.
 
 Once the .jar is created it may be executed.
 
-    java -jar music-service/build/libs/music-service-0.4.BUILD-SNAPSHOT-all.jar
+    java -jar music-service/build/libs/music-service-0.4-all.jar
 
 That will start the server on port 8080.    
 
@@ -47,7 +47,7 @@ That will start the server on port 8080.
 A [Docker](http://docker.com) image has been published which includes a version of this application.  To 
 install the image and start the container the first time run the following:
 
-    docker run --name mn_music_search -d -p 8086:8080 micronautsamples/music-search:0.3
+    docker run --name mn_music_search -d -p 8086:8080 micronautsamples/music-search:0.4
     
 Note that the argument after `-p` is a pair of port numbers.  The second number is the port inside the 
 container and that needs to be 8080.  The first number is the port in the host environment that you would 
