@@ -38,7 +38,7 @@ both the backend service and the UI.
 
 Once the .jar is created it may be executed.
 
-    java -jar music-service/build/libs/music-service-0.5.jar
+    java -jar music-service/build/libs/music-service-0.6.BUILD-SNAPSHOT.jar
 
 That will start the server on port 8080.    
 
