@@ -1,6 +1,8 @@
 package music.service;
 
 
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 public class Album {
     private String collectionName;
     private String artistName;
@@ -26,6 +28,7 @@ public class Album {
         return url;
     }
 
+    @JsonSetter("collectionViewUrl")
     public void setUrl(String url) {
         this.url = url;
     }

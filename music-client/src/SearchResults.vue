@@ -6,7 +6,9 @@
     <tbody>
     <tr v-for="result in results">
       <td>{{ result.artistName }}</td>
-      <td>{{ result.collectionName }}</td>
+      <td>
+        <a target="_blank" :href="result.collectionViewUrl">{{ result.collectionName }}</a>
+      </td>
     </tr>
     </tbody>
   </table>
