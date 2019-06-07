@@ -33,7 +33,7 @@ task assembleServerAndClient(dependsOn: ['copyClientResources', ':music-service:
 }
 
 task buildDocker(type: Docker) {
-    baseImage = 'williamyeh/java8'
+    baseImage = 'adoptopenjdk/openjdk11-openj9:jdk-11.0.1.13-alpine-slim'
     maintainer = 'Jeff Scott Brown <brownj@objectcomputing.com>'
     push = project.hasProperty('pushDocker')
     addFile {
@@ -41,7 +41,7 @@ task buildDocker(type: Docker) {
         rename {'music-search.jar'}
     }
     exposePort 8080
-    entryPoint(['java', '-Djava.security.egd=file:/dev/./urandom', '-jar', '/music-search.jar'])
+    entryPoint(['java', '-XX:+UnlockExperimentalVMOptions', '-XX:+UseCGroupMemoryLimitForHeap', '-Dcom.sun.management.jmxremote', '-noverify', '-jar', '/music-search.jar'])
 }
 
 buildDocker.dependsOn 'assembleServerAndClient'
