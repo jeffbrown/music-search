@@ -20,9 +20,9 @@ task copyClientResources(dependsOn: ':music-client:build') {
     description = 'Copy client resources into server'
 }
 
-copyClientResources.doFirst {
+copyClientResources.doLast {
     copy {
-        from "${project(':music-client').projectDir}/dist"
+        from "${project(':music-client').projectDir}/public"
         into "${project(':music-service').buildDir}/resources/main/public/"
     }
 }
