@@ -1,0 +1,7 @@
+micronaut:
+  server:
+    cors:
+      configurations:
+        web:
+          allowedOrigins:
+            - https://music-search.micronaut.io

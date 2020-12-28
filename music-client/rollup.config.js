@@ -64,7 +64,6 @@ export default {
 			__myapp: JSON.stringify({
 				env: {
 					isProd: production,
-					...config().parsed // attached the .env config
 				}
 			}),
 		}),
