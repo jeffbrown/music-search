@@ -13,3 +13,7 @@ task run {
 task build {
     dependsOn (['npm_install', 'npm_run_build'])
 }
+
+npm_run_build {
+    args = ['--production']
+}

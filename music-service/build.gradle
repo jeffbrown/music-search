@@ -3,7 +3,8 @@ plugins {
     id "io.micronaut.application" version '1.0.5'
 }
 
-group "music.service"
+group 'micronautsamples'
+version '0.9.BUILD-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -27,11 +28,21 @@ dependencies {
 }
 
 mainClassName = "music.service.Application"
+
 java {
     sourceCompatibility = JavaVersion.toVersion('1.8')
     targetCompatibility = JavaVersion.toVersion('1.8')
 }
 
+assemble {
+    dependsOn('copyClientResources')
+}
 
-
-
+task copyClientResources(dependsOn: ':music-client:build') {
+    group = 'build'
+    description = 'Copy client resources into server'
+    copy {
+        from "${project(':music-client').projectDir}/public"
+        into "${project(':music-service').buildDir}/resources/main/public/"
+    }
+}
