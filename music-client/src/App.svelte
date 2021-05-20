@@ -1,7 +1,6 @@
 <script>
   const MAX_RESULTS = [5, 10, 25];
-  const URL_PREFIX = __myapp.env.isProd ? 'https://music-search.micronaut.io/music/search/' :
-          'http://localhost:8080/music/search/';
+  const URL_PREFIX = '/music/search/';
 
   let bandName = '';
   let albums = [];
