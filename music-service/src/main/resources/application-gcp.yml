@@ -5,3 +5,4 @@ micronaut:
         web:
           allowedOrigins:
             - https://music-search.micronaut.io
+            - https://music-search.jeffandbetsy.net
