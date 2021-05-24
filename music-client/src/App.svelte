@@ -10,11 +10,12 @@
 
   async function search() {
     const url = URL_PREFIX + bandName + '?maxResults=' + maxResults;
-    const res = await fetch(url);
-    if (res.ok) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(await res.text());
       albums = await res.json();
-    } else {
-      error = await res.text();
+    } catch (e) {
+      error = e;
     }
   }
 </script>
