@@ -1,6 +1,7 @@
 <script>
   const MAX_RESULTS = [5, 10, 25];
-  const URL_PREFIX = '/music/search/';
+  const URL_PREFIX = __myapp.env.isProd ? '/music/search/' :
+          'http://localhost:8080/music/search/';
 
   let bandName = '';
   let albums = [];
