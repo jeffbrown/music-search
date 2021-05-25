@@ -31,6 +31,8 @@ jobs:
           registry: ${{ secrets.DOCKER_REGISTRY_URL }}
           username: _json_key
           password: ${{ secrets.GCLOUD_SERVICE_KEY }}
+      - name: Build The App
+        run: ./gradlew assemble --no-daemon
       - name: Build And Push Docker Image
         run: ./gradlew jib --no-daemon
       - name: Setup GCP Service Account
