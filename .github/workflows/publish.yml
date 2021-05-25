@@ -35,13 +35,12 @@ jobs:
         run: ./gradlew assemble --no-daemon
       - name: Build And Push Docker Image
         run: ./gradlew jib --no-daemon
-      - name: Setup GCP Service Account
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          version: 'latest'
-          service_account_email: ${{ secrets.GCLOUD_SERVICE_EMAIL }}
-          service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
-          export_default_credentials: true
+      -name: Setup GCP Service Account
+       uses: google-github-actions/setup-gcloud@master
+       with:
+         project_id: ${{ secrets.PROJECT_ID }}
+         service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+         export_default_credentials: true
       - name: Deploy To GCR
         run: |
           gcloud run deploy ${{ secrets.PROJECT_ID }} \
