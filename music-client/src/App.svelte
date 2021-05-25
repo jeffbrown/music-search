@@ -1,15 +1,17 @@
 <script>
+  import { onMount } from 'svelte';
   const MAX_RESULTS = [5, 10, 25];
-  const URL_PREFIX = __myapp.env.isProd ? '/music/search/' :
-          'http://localhost:8080/music/search/';
+  const URL_PREFIX = __myapp.env.isProd ? '' :
+          'http://localhost:8080';
 
   let bandName = '';
   let albums = [];
   let error = '';
   let maxResults = MAX_RESULTS[0];
+  let buildInfo = {};
 
   async function search() {
-    const url = URL_PREFIX + bandName + '?maxResults=' + maxResults;
+    const url = URL_PREFIX + '/music/search/' + bandName + '?maxResults=' + maxResults;
     try {
       const res = await fetch(url);
       if (!res.ok) throw new Error(await res.text());
@@ -18,6 +20,17 @@
       error = e;
     }
   }
+
+  onMount(async () => {
+    const url = URL_PREFIX + '/info';
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(await res.text());
+      buildInfo = await res.json();
+    } catch (e) {
+      error = e;
+    }
+  })
 </script>
 
 <main>
@@ -57,6 +70,11 @@
       {/each}
     </table>
   {/if}
+  <div class="footer">
+  {#if buildInfo.git}
+    <span>Built At {buildInfo.build.time} From Commit {buildInfo.git.commit.id} Made By {buildInfo.git.commit.user.name}</span>
+  {/if}
+  </div>
 </main>
 
 <style>
