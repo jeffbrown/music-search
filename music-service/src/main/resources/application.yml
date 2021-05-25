@@ -14,3 +14,7 @@ micronaut:
     json:
       additionalTypes:
         - text/javascript
+endpoints:
+  info:
+    enabled: true
+    sensitive: false
