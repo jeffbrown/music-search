@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  const GITHUB_REPO_URL = 'https://github.com/jeffbrown/music-search/commit/';
   const MAX_RESULTS = [5, 10, 25];
   const URL_PREFIX = __myapp.env.isProd ? '' :
           'http://localhost:8080';
@@ -72,7 +73,7 @@
   {/if}
   <div class="footer">
   {#if buildInfo.git}
-    <span>Built At {buildInfo.build.time} From Commit {buildInfo.git.commit.id} Made By {buildInfo.git.commit.user.name}</span>
+    <span>Version {buildInfo.build.version} Built At {buildInfo.build.time} (<a href="{GITHUB_REPO_URL}{buildInfo.git.commit.id}">{buildInfo.git.commit.id.substring(0, 10)}</a>)</span>
   {/if}
   </div>
 </main>
