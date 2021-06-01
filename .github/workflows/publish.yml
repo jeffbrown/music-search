@@ -17,9 +17,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-test-
       - name: Setup GraalVM CE
-        uses: DeLaGuardo/setup-graalvm@8bbfe44ef9c6f5c07e5af036a1bffd561c037d18
+        uses: DeLaGuardo/setup-graalvm@3.1
         with:
-          graalvm-version: 20.3.0.java11
+          graalvm-version: 21.1.0.java11
       - name: Run Tests
         run: ./gradlew check --no-daemon
       - name: Install Native Image
