@@ -36,13 +36,12 @@ jobs:
           DOCKER_IMAGE: ${{ secrets.DOCKER_REGISTRY_URL }}/${{ secrets.PROJECT_ORGANIZATION }}/${{ secrets.PROJECT_ID }}
         run: |
           ./gradlew dockerPushNative --no-daemon
-      - name: Setup GCP Service Account
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      - name: Setup Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@master
         with:
-          version: 'latest'
-          service_account_email: ${{ secrets.GCLOUD_SERVICE_EMAIL }}
+          version: '290.0.1'
           service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
-          export_default_credentials: true
+          project_id: ${{ secrets.PROJECT_ID }}
       - name: Deploy To GCR
         run: |
           gcloud run deploy ${{ secrets.PROJECT_ID }} \
