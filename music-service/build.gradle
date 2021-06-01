@@ -51,4 +51,6 @@ task copyClientResources(dependsOn: ':music-client:build') {
     }
 }
 
+dockerBuildNative.dependsOn('assemble')
+
 jib.to.image = 'gcr.io/oci-micronaut/music-search'
