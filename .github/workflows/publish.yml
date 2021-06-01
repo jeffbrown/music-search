@@ -3,6 +3,9 @@ on:
   push:
     tags:
       - 'v*'
+env:
+  GCLOUD_PROJECT_ID: ${{ secrets.GCLOUD_PROJECT_ID }}
+  GCLOUD_REGION: us-central1
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,28 +28,23 @@ jobs:
       - name: Install Native Image
         run: gu install native-image
       - name: Docker Login
-        uses: docker/login-action@v1
-        with:
-          registry: ${{ secrets.DOCKER_REGISTRY_URL }}
-          username: _json_key
-          password: ${{ secrets.GCLOUD_SERVICE_KEY }}
-      - name: Build and push docker image
+        run: |
+          gcloud auth configure-docker
+
+
+
+
+      - name: Build And Push Docker Image
         env:
-          TESTCONTAINERS_RYUK_DISABLED: true
           DOCKER_IMAGE: ${{ secrets.DOCKER_REGISTRY_URL }}/${{ secrets.PROJECT_ORGANIZATION }}/${{ secrets.PROJECT_ID }}
+          TESTCONTAINERS_RYUK_DISABLED: true
         run: |
-          ./gradlew dockerPushNative --no-daemon
-      - name: Setup Google Cloud CLI
-        uses: google-github-actions/setup-gcloud@master
-        with:
-          version: '290.0.1'
-          service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
-          project_id: ${{ secrets.PROJECT_ID }}
-      - name: Deploy To GCR
+          ./gradlew check dockerPushNative --no-daemon
+      - name: Deploy Cloud Run
         run: |
-          gcloud run deploy ${{ secrets.PROJECT_ID }} \
-          --region us-central1 \
-          --image ${{ secrets.DOCKER_REGISTRY_URL }}/${{ secrets.PROJECT_ORGANIZATION }}/${{ secrets.PROJECT_ID }} \
-          --platform managed \
-          --allow-unauthenticated \
-          --project ${{ secrets.PROJECT_ORGANIZATION }}
+          DOCKER_IMAGE_REPOSITORY=$(docker images --format "{{.Repository}}" | grep music-search)
+          DOCKER_IMAGE=$(docker images --format "{{.Repository}}:{{.Tag}}" "${DOCKER_IMAGE_REPOSITORY}" )
+
+          gcloud run deploy ${{ secrets.PROJECT_ID }} --quiet \
+            --image "${DOCKER_IMAGE}" --project "${secrets.PROJECT_ORGANIZATION}" \
+            --region "${GCLOUD_REGION}" --platform managed --allow-unauthenticated --format json
