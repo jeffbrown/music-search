@@ -1,8 +1,7 @@
 name: Publish To GCR
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [ master ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,6 +27,7 @@ jobs:
           version: '290.0.1'
           service_account_key: ${{ secrets.GCLOUD_SA_KEY }}
           project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
+          export_default_credentials: true
       - name: Docker Login
         run: |
           gcloud auth configure-docker
@@ -36,9 +36,4 @@ jobs:
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
           export DOCKER_IMAGE="gcr.io/oci-micronaut/music-search"
-          ./gradlew check dockerPushNative --no-daemon
-      - name: Deploy Cloud Run
-        run: |
-          gcloud run deploy music-search --quiet \
-            --image gcr.io/oci-micronaut/music-search --project oci-micronaut \
-            --region us-central1 --platform managed --allow-unauthenticated --format json
+          ./gradlew dockerPushNative --no-daemon
