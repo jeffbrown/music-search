@@ -3,11 +3,6 @@ on:
   push:
     tags:
       - 'v*'
-env:
-  GCLOUD_PROJECT_ID: ${{ secrets.GCLOUD_PROJECT_ID }}
-  GCLOUD_REGION: europe-west3
-  GCLOUD_GCR: eu.gcr.io
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,13 +35,10 @@ jobs:
         env:
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
-          export DOCKER_IMAGE="${GCLOUD_GCR}/${GCLOUD_PROJECT_ID}/music-search"
+          export DOCKER_IMAGE="gcr.io/oci-micronaut/music-search"
           ./gradlew check dockerPushNative --no-daemon
       - name: Deploy Cloud Run
         run: |
-          DOCKER_IMAGE_REPOSITORY=$(docker images --format "{{.Repository}}" | grep "${GCLOUD_PROJECT_ID}")
-          DOCKER_IMAGE=$(docker images --format "{{.Repository}}:{{.Tag}}" "${DOCKER_IMAGE_REPOSITORY}" )
-
-          gcloud run deploy "${GCLOUD_PROJECT_ID}" --quiet \
-            --image "${DOCKER_IMAGE}" --project "${GCLOUD_PROJECT_ID}" \
-            --region "${GCLOUD_REGION}" --platform managed --allow-unauthenticated --format json
+          gcloud run deploy music-search --quiet \
+            --image gcr.io/oci-micronaut/music-search --project oci-micronaut \
+            --region us-central-1 --platform managed --allow-unauthenticated --format json
