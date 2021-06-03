@@ -52,5 +52,5 @@ task copyClientResources(dependsOn: ':music-client:build') {
 }
 
 dockerBuildNative {
-    images = ["gcr.io/oci-micronaut/music-search"]
+    images = ["${System.env.DOCKER_IMAGE ?: project.name}:$project.version"]
 }
