@@ -35,5 +35,4 @@ jobs:
         env:
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
-          export DOCKER_IMAGE="gcr.io/oci-micronaut/music-search"
           ./gradlew dockerPushNative --no-daemon
