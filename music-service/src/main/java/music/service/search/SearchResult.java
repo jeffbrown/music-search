@@ -1,10 +1,12 @@
 package music.service.search;
 
+import io.micronaut.core.annotation.Introspected;
 import music.service.Album;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Introspected
 public class SearchResult {
 
     private int resultCount;

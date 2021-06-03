@@ -2,7 +2,9 @@ package music.service;
 
 
 import com.fasterxml.jackson.annotation.JsonSetter;
+import io.micronaut.core.annotation.Introspected;
 
+@Introspected
 public class Album {
     private String collectionName;
     private String artistName;
