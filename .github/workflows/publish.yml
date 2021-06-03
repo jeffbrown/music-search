@@ -3,11 +3,9 @@ on:
   push:
     branches: [ master ]
 env:
-  GCLOUD_PROJECT_ID: ${{ secrets.GCLOUD_PROJECT_ID }}
   GCLOUD_REGION: ${{ secrets.GCLOUD_REGION }}
   PROJECT_ORGANIZATION: ${{ secrets.PROJECT_ORGANIZATION }}
   DOCKER_IMAGE: ${{ secrets.DOCKER_REGISTRY_URL }}
-  GCLOUD_SA_KEY: ${{ secrets.GCLOUD_SA_KEY }}
 jobs:
   build:
     runs-on: ubuntu-latest
