@@ -36,3 +36,8 @@ jobs:
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
           ./gradlew dockerPushNative --no-daemon
+      - name: Deploy Cloud Run
+          run: |
+            gcloud run deploy music-search --quiet \
+              --image gcr.io/oci-micronaut/music-search --project oci-micronaut \
+              --region us-central1 --platform managed --allow-unauthenticated --format json
