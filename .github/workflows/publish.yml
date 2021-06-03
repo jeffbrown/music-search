@@ -1,7 +1,8 @@
 name: Publish To GCR
 on:
   push:
-    branches: [ master ]
+    tags:
+      - 'v*'
 env:
   GCLOUD_REGION: ${{ secrets.GCLOUD_REGION }}
   PROJECT_ORGANIZATION: ${{ secrets.PROJECT_ORGANIZATION }}
