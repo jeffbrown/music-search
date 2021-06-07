@@ -41,6 +41,7 @@ jobs:
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
           ./gradlew clean --no-daemon
+          ./gradlew assemble --no-daemon
           ./gradlew dockerPushNative --no-daemon
       - name: Deploy Cloud Run
         run: |
