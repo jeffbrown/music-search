@@ -32,7 +32,6 @@ jobs:
           version: '290.0.1'
           service_account_key: ${{ secrets.GCLOUD_SA_KEY }}
           project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
-          export_default_credentials: true
       - name: Docker Login
         run: |
           gcloud auth configure-docker
@@ -40,9 +39,7 @@ jobs:
         env:
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
-          ./gradlew clean --no-daemon
-          ./gradlew assemble --no-daemon
-          ./gradlew dockerPushNative --no-daemon
+          ./gradlew check dockerPushNative --no-daemon
       - name: Deploy Cloud Run
         run: |
           gcloud run deploy music-search --quiet \
