@@ -1,0 +1,6 @@
+{
+  "resources": [
+    {"pattern":"\\QMETA-INF/build-info.properties\\E"},
+    {"pattern":"\\Qgit.properties\\E"}
+  ]
+}
