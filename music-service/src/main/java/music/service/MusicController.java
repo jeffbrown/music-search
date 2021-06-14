@@ -4,6 +4,8 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.scheduling.TaskExecutors;
+import io.micronaut.scheduling.annotation.ExecuteOn;
 import music.service.search.ItunesClient;
 import music.service.search.SearchResult;
 
@@ -20,6 +22,7 @@ public class MusicController {
     }
 
     @Get("/search/{searchTerm}")
+    @ExecuteOn(TaskExecutors.IO)
     public List<Album> search(String searchTerm, @Nullable @QueryValue String maxResults) {
         final int limit;
         if(StringUtils.isDigits(maxResults)) {
