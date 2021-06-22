@@ -4,6 +4,9 @@ micronaut:
   server:
     cors:
       enabled: true
+      configurations:
+        allowedOrigins:
+          - https://music-search.micronaut.io
   router:
     static-resources:
       default:
